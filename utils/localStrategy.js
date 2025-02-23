@@ -1,11 +1,11 @@
 const LocalStrategy = require("passport-local").Strategy;
-const { db } = require("../db/database");
+const { Users } = require("../db/Users");
 const bcrypt = require("bcryptjs");
 
 
 const verifyFunction = async (username, password, done) => {
     try {
-        const user = await db.getUserByUsername(username);
+        const user = await Users.getByUsername(username);
 
         if(!user) {
             return done(null, false, {message: "Incorrect username"});

@@ -2,7 +2,7 @@ const session = require("express-session");
 const pgSession = require("connect-pg-simple")(session);
 const passport = require("passport");
 const { pool } = require("../db/pool");
-const { db } = require("../db/database");
+const { Users } = require("../db/Users");
 
 passport.use(Strategy);
 
@@ -18,7 +18,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
     try {
-        const user = await db.getUserByID(id);
+        const user = await Users.getByID(id);
 
         done(null, user);
     } catch(error) {
