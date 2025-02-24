@@ -31,6 +31,9 @@ app.use((req, res, next) => {
 
 app.use(indexRouter);
 app.use(userRouter);
+app.use((error, req, res, next) => {
+    res.status(error.code).send(error.code + " " + error.message);
+})
 
 app.listen(8000, () => console.log("App listening on port 8000"));
 

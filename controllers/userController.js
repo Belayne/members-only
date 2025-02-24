@@ -1,15 +1,20 @@
 const passport = require("passport");
 const { Users } = require("../db/Users");
 const bcrypt = require("bcryptjs");
+const { HTTPError } = require("../utils/HTTPError");
 
 
 const userController = {
     showSignupPage: (req, res, next) => {
-        if(!res.locals.user) {
-            res.render("signup");
-        }
-        else {
-            throw new Error("Already logged in");
+        try {
+            if(!res.locals.user) {
+                res.render("signup");
+            }
+            else {
+                throw new HTTPError(400, "Already logged in");
+            }
+        } catch(error) {
+            next(error);
         }
     },
 
@@ -17,7 +22,7 @@ const userController = {
         if(!res.locals.user) {
             res.render("login");
         } else {
-            throw new Error("Already logged in");
+            throw new HTTPError(400, "Already logged in");
         }
     },
 
