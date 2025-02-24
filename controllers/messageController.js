@@ -16,6 +16,12 @@ const messageController = {
         const {title, message_text} = req.body;
         await Messages.insert({title, message_text, user_id: res.locals.user.id});
         res.redirect("/");
+    },
+
+    deleteMessage: async (req, res, next) => {
+        const {id} = req.body;
+        await Messages.delete(id);
+        res.redirect("/");
     }
 }
 

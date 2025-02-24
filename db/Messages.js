@@ -17,6 +17,10 @@ const Messages = {
     insert: async ({title, message_text, user_id}) => {
         const timestamp = psqlDate.now();
         await query(`INSERT INTO messages (title, message_text, user_id, timestamp) VALUES ($1, $2, $3, $4);`, [title, message_text, user_id, timestamp]);
+    },
+
+    delete: async (id) => {
+        await query(`DELETE FROM messages WHERE id = $1;`, [id]);
     }
 }
 

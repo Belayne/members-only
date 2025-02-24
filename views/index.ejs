@@ -32,6 +32,9 @@
                         <p><%= message.message_text %></p>
                         <p><%= message.username %></p>
                         <p><%= message.timestamp %></p>
+                        <% if(locals.user.role === "Admin") {%>
+                            <%-include("./partials/deleteMessageButton", {id: message.id})%>
+                       <% } %>
                     </article>
                     <%})%>
             </section>
