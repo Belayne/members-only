@@ -7,11 +7,16 @@
 </head>
 <body>
     <%- include("./partials/pageHeader") %>
+    <% if(!locals.user) {%>
+        <a href="/signup">Sign up</a>
+        or
+        <a href="/login">Login</a>
+        <% } %>
     <main>
         <% if(messages.length > 0) {%>
             <section>
                 <% messages.forEach(message => { %>
-                    <% if(!locals.user || !["admin", "member"].includes(locals.uses.role)) {
+                    <% if(!locals.user || !["admin", "member"].includes(locals.user.role)) {
                         message.username = "Anonymous";
                         message.timestamp = "";
                     } %>
@@ -26,6 +31,9 @@
             <%} else {%>
                 <h2>No messages.</h2>
             <%}%>
+            <% if(locals.user && ["admin", "member"].includes(locals.user.role)) {%>
+                <a href="">Add a message</a>
+            <% } %>
     </main>
 </body>
 </html>

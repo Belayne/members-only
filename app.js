@@ -5,6 +5,7 @@ const { Strategy } = require("./utils/localStrategy");
 const { sessionStore } = require("./utils/configPassport");
 const passport = require("passport");
 const { indexRouter } = require("./routes/indexRouter");
+const { userRouter } = require("./routes/userRouter");
 
 const app = express();
 app.set("views", path.join(__dirname, "views"));
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 })
 
 app.use(indexRouter);
+app.use(userRouter);
 
 app.listen(8000, () => console.log("App listening on port 8000"));
 

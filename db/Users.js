@@ -19,7 +19,8 @@ const Users = {
     },
 
     insert: async ({username, password}) => {
-        await query(`INSERT INTO users (username, password) VALUES ($1, $2);`, [username, password]);
+        const role = "Guest";
+        await query(`INSERT INTO users (username, password, role) VALUES ($1, $2, $3);`, [username, password, role]);
     },
 }
 

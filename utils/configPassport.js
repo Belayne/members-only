@@ -1,9 +1,13 @@
 const session = require("express-session");
 const pgSession = require("connect-pg-simple")(session);
 const passport = require("passport");
-const { pool } = require("../db/pool");
+const {Pool} = require("pg");
 const { Users } = require("../db/Users");
 const { Strategy } = require("./localStrategy");
+
+const pool = new Pool({
+    connectionString: process.env.database_URL
+})
 
 passport.use(Strategy);
 
