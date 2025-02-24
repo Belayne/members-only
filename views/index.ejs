@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readit</title>
+</head>
+<body>
+    <%- include("./partials/pageHeader") %>
+    <main>
+        <% if(messages.length > 0) {%>
+            <section>
+                <% messages.forEach(message => { %>
+                    <% if(!locals.user || !["admin", "member"].includes(locals.uses.role)) {
+                        message.username = "Anonymous";
+                        message.timestamp = "";
+                    } %>
+                    <article>
+                        <h3><%= message.title %></h3>
+                        <p><%= message.message_text %></p>
+                        <p><%= message.username %></p>
+                        <p><%= message.timestamp %></p>
+                    </article>
+                    <%})%>
+            </section>
+            <%} else {%>
+                <h2>No messages.</h2>
+            <%}%>
+    </main>
+</body>
+</html>

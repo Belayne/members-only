@@ -3,6 +3,7 @@ const pgSession = require("connect-pg-simple")(session);
 const passport = require("passport");
 const { pool } = require("../db/pool");
 const { Users } = require("../db/Users");
+const { Strategy } = require("./localStrategy");
 
 passport.use(Strategy);
 

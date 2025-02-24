@@ -4,6 +4,7 @@ const session = require("express-session");
 const { Strategy } = require("./utils/localStrategy");
 const { sessionStore } = require("./utils/configPassport");
 const passport = require("passport");
+const { indexRouter } = require("./routes/indexRouter");
 
 const app = express();
 app.set("views", path.join(__dirname, "views"));
@@ -22,8 +23,14 @@ app.use(session({
 }));
 
 app.use(passport.session());
+app.use((req, res, next) => {
+    res.locals.user = req.user;
+    next();
+})
 
-app.listen(3000, () => console.log("App listening on port 3000"));
+app.use(indexRouter);
+
+app.listen(8000, () => console.log("App listening on port 8000"));
 
 
 

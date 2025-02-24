@@ -9,7 +9,8 @@ const Messages = {
     },
 
     getAll: async () => {
-        const {rows} = await query(`SELECT * FROM messages;`)
+        const {rows} = await query(`SELECT messages.id, message_text, title, timestamp, username FROM messages
+            JOIN users on users.id=user_id;`)
         return rows;
     },
 
