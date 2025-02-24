@@ -12,13 +12,16 @@
         or
         <a href="/login">Login</a>
         <% } else {%>
+            <% if(locals.user.role == "Guest") {%> 
+            <a href="/member">Become a member</a>
+            <%}%>
             <a href="/logout">Logout</a>
             <% } %>
     <main>
         <% if(messages.length > 0) {%>
             <section>
                 <% messages.forEach(message => { %>
-                    <% if(!locals.user || !["admin", "member"].includes(locals.user.role)) {
+                    <% if(!locals.user || locals.user.role == "Guest") {
                         message.username = "Anonymous";
                         message.timestamp = "";
                     } %>

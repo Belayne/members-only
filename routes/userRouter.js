@@ -7,6 +7,8 @@ userRouter.get("/signup", userController.showSignupPage);
 userRouter.post("/signup", userController.createUser);
 userRouter.get("/login", userController.showLoginPage);
 userRouter.post("/login", userController.login);
-userRouter.get("/logout", userController.logout)
+userRouter.get("/logout", userController.logout);
+userRouter.get("/member", userController.showMemberPage);
+userRouter.post("/member", userController.makeMember);
 
 module.exports.userRouter = userRouter;

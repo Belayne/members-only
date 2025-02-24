@@ -11,7 +11,7 @@ const userController = {
                 res.render("signup");
             }
             else {
-                throw new HTTPError(400, "Already logged in");
+                throw new HTTPError(400, "Already logged-in");
             }
         } catch(error) {
             next(error);
@@ -22,7 +22,30 @@ const userController = {
         if(!res.locals.user) {
             res.render("login");
         } else {
-            throw new HTTPError(400, "Already logged in");
+            throw new HTTPError(400, "Already logged-in");
+        }
+    },
+
+    showMemberPage: (req, res) => {
+        if(res.locals.user) {
+            res.render("memberPage");
+        } else {
+            throw new HTTPError(401, "Only logged-in users can become members");
+        }
+    },
+
+    makeMember: async (req, res, next) => {
+        try {
+            const {secret} = req.body;
+            if(secret === process.env.secretPassphrase) {
+                await Users.makeMember(res.locals.user.id);
+                res.redirect("/");
+            }
+            else {
+                res.redirect("/member");
+            }
+        } catch (error) {
+            next(error);
         }
     },
 

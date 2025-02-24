@@ -22,6 +22,10 @@ const Users = {
         const role = "Guest";
         await query(`INSERT INTO users (username, password, role) VALUES ($1, $2, $3);`, [username, password, role]);
     },
+
+    makeMember: async (id) => {
+        await query(`UPDATE users SET role = 'Member' WHERE id = $1`, [id]);
+    }
 }
 
 module.exports = {
