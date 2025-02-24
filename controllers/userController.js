@@ -49,6 +49,29 @@ const userController = {
         }
     },
 
+    showAdminPage: (req, res) => {
+        if(res.locals.user) {
+            res.render("adminPage");
+        } else {
+            throw new HTTPError(401, "Only logged-in users can become admin");
+        }
+    },
+
+    makeAdmin: async (req, res, next) => {
+        try {
+            const {secret} = req.body;
+            if(secret === process.env.secretAdminPassphrase) {
+                await Users.makeAdmin(res.locals.user.id);
+                res.redirect("/");
+            }
+            else {
+                res.redirect("/admin");
+            }
+        } catch (error) {
+            next(error);
+        }
+    },
+
     createUser: async (req, res, next) => {
         try {
             const {username, password} = req.body;

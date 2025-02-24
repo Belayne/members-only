@@ -15,6 +15,8 @@
             <% if(locals.user.role == "Guest") {%> 
             <a href="/member">Become a member</a>
             <%}%>
+            <p><%= locals.user.username %></p>
+            <p><%= locals.user.role %></p>
             <a href="/logout">Logout</a>
             <% } %>
     <main>

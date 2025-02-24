@@ -10,5 +10,8 @@ userRouter.post("/login", userController.login);
 userRouter.get("/logout", userController.logout);
 userRouter.get("/member", userController.showMemberPage);
 userRouter.post("/member", userController.makeMember);
+userRouter.get("/admin", userController.showAdminPage);
+userRouter.post("/admin", userController.makeAdmin);
+
 
 module.exports.userRouter = userRouter;

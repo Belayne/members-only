@@ -25,6 +25,10 @@ const Users = {
 
     makeMember: async (id) => {
         await query(`UPDATE users SET role = 'Member' WHERE id = $1`, [id]);
+    },
+
+    makeAdmin: async (id) => {
+        await query(`UPDATE users SET role = 'Admin' WHERE id = $1`, [id]);
     }
 }
 
