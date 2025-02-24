@@ -6,6 +6,7 @@ const { sessionStore } = require("./utils/configPassport");
 const passport = require("passport");
 const { indexRouter } = require("./routes/indexRouter");
 const { userRouter } = require("./routes/userRouter");
+const { messageRouter } = require("./routes/messageRouter");
 
 const app = express();
 app.set("views", path.join(__dirname, "views"));
@@ -31,6 +32,8 @@ app.use((req, res, next) => {
 
 app.use(indexRouter);
 app.use(userRouter);
+app.use(messageRouter);
+
 app.use((error, req, res, next) => {
     res.status(error.code).send(error.code + " " + error.message);
 })
