@@ -3,38 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
     <title>Readit</title>
 </head>
 <body>
     <%- include("./partials/pageHeader") %>
-    <% if(!locals.user) {%>
-        <a href="/signup">Sign up</a>
-        or
-        <a href="/login">Login</a>
-        <% } else {%>
-            <% if(locals.user.role == "Guest") {%> 
-            <a href="/member">Become a member</a>
-            <%}%>
-            <p><%= locals.user.username %></p>
-            <p><%= locals.user.role %></p>
-            <a href="/logout">Logout</a>
-            <% } %>
-    <main>
+    <main class="w-screen mx-auto md:w-1/2 p-2">
         <% if(messages.length > 0) {%>
-            <section>
+            <section class="my-3">
                 <% messages.forEach(message => { %>
                     <% if(!locals.user || locals.user.role == "Guest") {
                         message.username = "Anonymous";
                         message.timestamp = "";
                     } %>
-                    <article>
-                        <h3><%= message.title %></h3>
+                    <article class="py-2">
+                        <h3 class="text-xl font-bold border-b"><%= message.title %></h3>
                         <p><%= message.message_text %></p>
-                        <p><%= message.username %></p>
-                        <p><%= message.timestamp %></p>
-                        <% if(locals.user.role === "Admin") {%>
-                            <%-include("./partials/deleteMessageButton", {id: message.id})%>
-                       <% } %>
+                        <div class="flex items-center gap-2">
+                            <p class="text-sm"><%= message.username %></p>
+                            <p class="text-sm"><%= message.timestamp %></p>
+                            <% if(locals.user && locals.user.role === "Admin") {%>
+                                <%-include("./partials/deleteMessageButton", {id: message.id})%>
+                                                   <% } %>
+                        </div>
                     </article>
                     <%})%>
             </section>
@@ -42,8 +33,10 @@
                 <h2>No messages.</h2>
             <%}%>
             <% if(locals.user) {%>
-                <a href="/new-message">Add a message</a>
-            <% } %>
+                <a class="inline-block p-2 bg-green-700 text-white border float-end" href="/new-message">Add a message</a>
+            <% } else {%>
+                <p class="p-2 border bg-red-400 text-white w-fit float-end">You must register or login to add a message</p>
+                <% } %>
     </main>
 </body>
 </html>

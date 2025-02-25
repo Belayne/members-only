@@ -1,3 +1,18 @@
-<header>
-    <h1>Readit</h1>
+<header class="p-2 bg-gray-200 flex items-center justify-between gap-4">
+    <h1 class="p-2 text-2xl"><a href="/" class="inline-block w-full h-full">Readit</a></h1>
+    <% if(!locals.user) {%>
+        <div class="">
+            <a class="border p-2 hover:bg-white transition-colors" href="/login">Login</a>
+            <a class="border p-2 hover:bg-white transition-colors" href="/signup">Sign up</a>
+        </div>
+        <% } else {%>
+            <% if(locals.user.role == "Guest") {%> 
+            <a class="border p-2 hover:bg-white transition-colors" href="/member">Become a member</a>
+            <%}%>
+            <div class="ml-auto">
+                <p><%= locals.user.username %></p>
+                <p class="text-xs">(<%= locals.user.role %>)</p>
+            </div>
+            <a class="border p-2 hover:bg-white transition-colors" href="/logout">Logout</a>
+            <% } %>
 </header>
