@@ -35,7 +35,8 @@ app.use(userRouter);
 app.use(messageRouter);
 
 app.use((error, req, res, next) => {
-    res.status(error.code).send(error.code + " " + error.message);
+    const code = error.code || 500;
+    res.status(code).send({error: code + " " + error.message});
 })
 
 app.listen(8000, () => console.log("App listening on port 8000"));
