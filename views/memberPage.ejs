@@ -11,7 +11,10 @@
     <main class="">
         <h2 class="text-center p-4 text-xl mt-8">Become a member</h2>
         <form action="/member" method="POST" class="flex flex-col gap-4 p-4 md:w-md w-screen mx-auto my-2 shadow-lg shadow-neutral-300 rounded-md">
-                <input class="border border-neutral-300 p-2.5 rounded-sm" placeholder="Secret passphrase" type="text" name="secret" id="secret" required>
+                <div class="flex flex-col">
+                    <label class="text-sm text-red-400 pl-1" for="secret">hint: it's my full name</label>
+                    <input class="border border-neutral-300 p-2.5 rounded-sm" placeholder="Secret passphrase" type="text" name="secret" id="secret" required>
+                </div>
                 <button class="rounded-md border p-2 col-start-2 justify-self-end text-xl font-bold bg-black text-white w-full" type="submit">Join</button>
         </form>
     </main>
