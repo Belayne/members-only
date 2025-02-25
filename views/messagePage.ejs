@@ -9,13 +9,11 @@
 <body>
     <%- include("./partials/pageHeader") %>
     <main>
-        <h2>New message</h2>
-        <form action="/new-message" method="POST">
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title" placeholder="Enter title">
-            <label for="message">Message</label>
-            <textarea name="message_text" id="message"></textarea>
-            <button type="submit">Add message</button>
+        <h2 class="text-center p-4 text-xl mt-8">New message</h2>
+        <form action="/new-message" method="POST" class="flex flex-col gap-4 p-4 md:w-xl w-screen mx-auto my-2 shadow-lg shadow-neutral-300 rounded-md">
+                <input class="border border-neutral-300 p-2.5 rounded-sm" placeholder="Title" type="text" name="title" id="title" required>
+                <textarea class="border border-neutral-300 p-2.5 rounded-sm" placeholder="Message text" name="message_text" id="message" required></textarea>
+                <button class="rounded-md border p-2 col-start-2 justify-self-end text-xl font-bold bg-black text-white w-full" type="submit">Send message</button>
         </form>
     </main>
 </body>
