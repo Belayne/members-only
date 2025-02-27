@@ -24,5 +24,6 @@ CSS framework: Tailwind
 ## Database
 
 **Schema**
-![[Members%20only.png]]
+
+![image](https://github.com/Belayne/members-only/blob/main/Members%20only.png?raw=true)
 
