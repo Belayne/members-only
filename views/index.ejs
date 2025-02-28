@@ -6,11 +6,11 @@
     <link rel="stylesheet" href="/styles.css">
     <title>Readit</title>
 </head>
-<body>
+<body class="h-screen overflow-hidden">
     <%- include("./partials/pageHeader") %>
-    <main class="w-screen mx-auto md:w-1/2 p-2">
+    <main class="w-screen mx-auto lg:w-1/2 px-2">
         <% if(messages.length > 0) {%>
-            <section class="my-3">
+            <section class="py-3 overflow-y-auto max-h-[80vh] scroll-m-2 pr-2 relative">
                 <% messages.forEach(message => { %>
                     <% if(!locals.user || locals.user.role == "Guest") {
                         message.username = "Anonymous";
@@ -28,15 +28,16 @@
                         </div>
                     </article>
                     <%})%>
+                    <% if(locals.user) {%>
+                <a class="sticky bottom-0 p-2 bg-green-700 text-white border float-end" href="/new-message">Add a message</a>
+            <% } else {%>
+                <p class="p-2 border sticky bottom-0  bg-red-400 text-white w-fit float-end">You must register or login to add a message</p>
+                <% } %>
             </section>
             <%} else {%>
                 <h2>No messages.</h2>
             <%}%>
-            <% if(locals.user) {%>
-                <a class="inline-block p-2 bg-green-700 text-white border float-end" href="/new-message">Add a message</a>
-            <% } else {%>
-                <p class="p-2 border bg-red-400 text-white w-fit float-end">You must register or login to add a message</p>
-                <% } %>
+            
     </main>
 </body>
 </html>
