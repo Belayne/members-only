@@ -21,7 +21,7 @@
                         <p><%= message.message_text %></p>
                         <div class="flex items-center gap-2">
                             <p class="text-sm"><%= message.username %></p>
-                            <p class="text-sm"><%= message.timestamp %></p>
+                            <p class="text-sm text-neutral-500"><%= message.timestamp %></p>
                             <% if(locals.user && locals.user.role === "Admin") {%>
                                 <%-include("./partials/deleteMessageButton", {id: message.id})%>
                                                    <% } %>

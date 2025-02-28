@@ -9,8 +9,9 @@ const Messages = {
     },
 
     getAll: async () => {
-        const {rows} = await query(`SELECT messages.id, message_text, title, timestamp, username FROM messages
-            JOIN users on users.id=user_id;`)
+        const now = psqlDate.now();
+        const {rows} = await query(`SELECT messages.id, message_text, title, $1 - timestamp AS interval, username FROM messages
+            JOIN users on users.id=user_id;`, [now])
         return rows;
     },
 
